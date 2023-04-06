@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import useMarvelService from "../../services/MarvelService";
-
-import "./charList.scss";
+import useMarvelService from '../../services/MarvelService';
+import './charList.scss';
 
 const CharList = (props) => {
+
     const [charList, setCharList] = useState([]);
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [offset, setOffset] = useState(210);
@@ -31,11 +31,11 @@ const CharList = (props) => {
             ended = true;
         }
 
-        setCharList(charList => [...charList, ...newCharList]);
-        setNewItemLoading(newItemLoading => false);
+        setCharList([...charList, ...newCharList]);
+        setNewItemLoading(false);
         setOffset(offset => offset + 9);
         setCharEnded(charEnded => ended);
-    };
+    }
 
     const itemRefs = useRef([]);
 
@@ -53,7 +53,8 @@ const CharList = (props) => {
             }
 
             return (
-                <li className="char__item"
+                <li
+                    className="char__item"
                     tabIndex={0}
                     ref={el => itemRefs.current[i] = el}
                     key={item.id}
@@ -66,14 +67,12 @@ const CharList = (props) => {
                             props.onCharSelected(item.id);
                             focusOnItem(i);
                         }
-                    }}
-                >
+                    }}>
                     <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
                     <div className="char__name">{item.name}</div>
                 </li>
             )
-        })
-
+        });
         return (
             <ul className="char__grid">
                 {items}
@@ -99,11 +98,11 @@ const CharList = (props) => {
                 <div className="inner">load more</div>
             </button>
         </div>
-    );
+    )
 }
 
 CharList.propTypes = {
-    onCharSelected: PropTypes.func
+    onCharSelected: PropTypes.func.isRequired
 }
 
 export default CharList;
