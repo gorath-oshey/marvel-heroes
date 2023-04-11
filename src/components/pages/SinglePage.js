@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import {useParams} from 'react-router-dom';
+import {useState, useEffect} from 'react';
 
 import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
@@ -12,7 +12,7 @@ const SinglePage = ({Component, dataType}) => {
     const {loading, error, getComic, getCharacter, clearError} = useMarvelService();
 
     useEffect(() => {
-        updateData() 
+        updateData()
     }, [id])
 
     const updateData = () => {
@@ -22,8 +22,8 @@ const SinglePage = ({Component, dataType}) => {
             case 'comic':
                 getComic(id).then(onDataLoaded);
                 break;
-                case 'character':
-                    getCharacter(id).then(onDataLoaded);
+            case 'character':
+                getCharacter(id).then(onDataLoaded);
         }
     }
 
@@ -37,12 +37,12 @@ const SinglePage = ({Component, dataType}) => {
 
     return (
         <>
-        <AppBanner/>
-        {errorMessage}
-        {spinner}
-        {content}
+            <AppBanner/>
+            {errorMessage}
+            {spinner}
+            {content}
         </>
-        )
+    )
 }
 
 export default SinglePage;
